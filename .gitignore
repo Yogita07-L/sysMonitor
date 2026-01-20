@@ -1,0 +1,8 @@
+# Ignore the compiled program
+monitor
+
+# Ignore object files
+*.o
+
+# Ignore VS Code's local settings
+.vscode/
