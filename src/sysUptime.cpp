@@ -1,5 +1,6 @@
 #include "sysUptime.h"
 #include <fstream>
+#include"iomanip"
 
 double SysUptime::GetRawUptime() {
     double uptime = 0.0;
@@ -21,6 +22,9 @@ std::string SysUptime::GetFormattedUptime(){
     int minute = (totalSec % 3600) / 60;
     int sec = totalSec % 60;
 
-    return std::to_string(day) + "d " + std::to_string(hour) + "h " + 
-           std::to_string(minute) + "m " + std::to_string(sec) + "s";
+    std::stringstream uptime;
+    uptime  << std::setw(2) << std::setfill('0') << day << "d " << std::setw(2) << std::setfill('0') << hour << "h " 
+            << std::setw(2) << std::setfill('0') << minute << "m " << std::setw(2) << std::setfill('0')  << sec << "s ";
+
+    return uptime.str();
 }
