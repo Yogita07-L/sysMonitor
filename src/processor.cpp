@@ -23,7 +23,9 @@ processor::~processor()
  * Function for getting the current values from /proc/stat file
  */
 processor::CpuData processor::getSnapshot(){
-    std::ifstream file("/proc/stat");
+    CpuData current = {0, 0};  /* Imtitalized the current struct to 0*/
+
+    std::ifstream file("/proc/stat"); /*Open the stat file*/
     std::string cpu_label;
     uint64_t time = 0, idle = 0, total = 0;
 
@@ -39,10 +41,13 @@ processor::CpuData processor::getSnapshot(){
             }
             total += time;  /* total time of current snapshot */
         }
-    } 
-    CpuData current = {idle, total};
+        current = {idle, total};
+    }
+    else{
+        /* Error if the file does not open*/
+        std::cerr << "The file cannot be opened."<< std::endl;
+    }
     return current;
-
 }
 /**
  * Function to calculate the  total utilized CPU time
