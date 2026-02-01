@@ -2,7 +2,7 @@
 #include <fstream>
 
 
-std::string GenInfo::GetHostName(){
+std::string genInfo::GetHostName(){
 
     std::string hostname;
     std::ifstream file("/proc/sys/kernel/hostname");
@@ -13,7 +13,7 @@ std::string GenInfo::GetHostName(){
     return hostname;
 }
 
-std::string GenInfo::GetOSName(){
+std::string genInfo::GetOSName(){
     std::string Kernel;
     std::ifstream file("/proc/version");
 

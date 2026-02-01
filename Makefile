@@ -1,10 +1,16 @@
-# The name of final program
+# 1. Variables - Makes it easy to change compilers or flags later
+CXX = g++-13
+CXXFLAGS = -I include -Wall -Wextra -std=c++17
 TARGET = monitor
 
-# The command to build the program
-$(TARGET): src/main.cpp src/sysUptime.cpp
-	g++-13 -I include/ src/main.cpp src/sysUptime.cpp src/genInfo.cpp -o $(TARGET)
+# 2. Wildcards - Automatically finds all .cpp files in the src/ directory
+SRCS = $(wildcard src/*.cpp)
 
-# A rule to delete the program so it can rebuild from scratch
+# 3. The Build Rule
+# The $(SRCS) part ensures that if ANY .cpp or .h file changes, it rebuilds.
+$(TARGET): $(SRCS) $(wildcard include/*.h)
+	$(CXX) $(CXXFLAGS) $(SRCS) -o $(TARGET)
+
+# 4. Clean Rule
 clean:
 	rm -f $(TARGET)

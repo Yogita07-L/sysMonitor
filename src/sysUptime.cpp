@@ -2,17 +2,17 @@
 #include <fstream>
 #include"iomanip"
 
-double SysUptime::GetRawUptime() {
+double sysUptime::GetRawUptime() {
     double uptime = 0.0;
     std::ifstream file("/proc/uptime");
-
+  
     if(file.is_open()){
         file>>uptime;
     }
     return uptime;
 }
 
-std::string SysUptime::GetFormattedUptime(){
+std::string sysUptime::GetFormattedUptime(){
     // Get the raw data by calling our other function
     double raw = GetRawUptime();
     long totalSec = (long)raw;

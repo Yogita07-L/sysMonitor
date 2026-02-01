@@ -3,7 +3,7 @@
 
 #include <string>
 
-class GenInfo {
+class genInfo {
 public:
     //Host name function
     std::string GetHostName();

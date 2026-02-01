@@ -2,10 +2,14 @@
 #include <unistd.h>  // Essential for sleep() on Linux
 #include "sysUptime.h"
 #include "genInfo.h"
+#include "processor.h"
 
 int main() {
-    SysUptime monitor; // Create the object
-    GenInfo m2;
+    std::cout << "--- PROGRAM STARTING ---" << std::endl;
+
+    sysUptime monitor; // Create the object
+    genInfo m2;
+    processor m3;
 
     while(true) {
         // Clear screen logic
@@ -17,6 +21,7 @@ int main() {
         std::cout << "Host Name: " << m2.GetHostName() << "                 Kernel: " << m2.GetOSName() << std::endl;
         
         std::cout << "Uptime " << monitor.GetFormattedUptime() << std::endl;
+        std::cout << "Total CPU Usage " << m3.getUtilization() << "%" << std::endl;
         
         // Output the formatted string
 

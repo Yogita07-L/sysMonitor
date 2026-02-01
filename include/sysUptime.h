@@ -3,7 +3,7 @@
 
 #include <string>
 
-class SysUptime {
+class sysUptime {
 public:
     // Get the pure number from Linux
     double GetRawUptime();
