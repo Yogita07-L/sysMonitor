@@ -15,14 +15,15 @@ int main() {
         // Clear screen logic
         std::cout << "\033[2J\033[1;1H"; 
 
-        std::cout << "--------------------------" << std::endl;
-        std::cout << "    SYSTEM MONITOR        " << std::endl;
-        std::cout << "--------------------------" << std::endl;
+        std::cout << "************************************" << std::endl;
+        std::cout << "        LINUX SYSTEM MONITOR        " << std::endl;
+        std::cout << "************************************" << std::endl;
         std::cout << "Host Name: " << m2.GetHostName() << "                 Kernel: " << m2.GetOSName() << std::endl;
-        
-        std::cout << "Uptime " << monitor.GetFormattedUptime() << std::endl;
-        std::cout << "Total CPU Usage " << m3.getUtilization() << "%" << std::endl;
-        
+        std::cout << "\nUptime " << monitor.GetFormattedUptime() << std::endl;
+
+        float currentUsage = m3.getUtilization();
+        std::cout << "CPU Usage " << m3.getProgressBar(currentUsage) << " "
+                    << currentUsage << " %"<< std::endl;
         // Output the formatted string
 
         

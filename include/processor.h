@@ -19,12 +19,19 @@ private:
     };
     /* Private helper function to get the cpu data from snapshot */
     CpuData getSnapshot();
+
+
 public:
     /* Default constructor to call the /stat file for previous time snapshot */
     processor();
+
     ~processor();
+    
     /* Function to calculate the  total utilized CPU time */
     float getUtilization();
+
+    /*Helper function to print the progress bar*/
+    std::string getProgressBar(float percentage);
 };
 
 #endif

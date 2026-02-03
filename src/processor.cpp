@@ -13,12 +13,14 @@ processor::processor(){
     prev_idle_time = prev.idle;   
     prev_total_time = prev.total;
 }
+
  /**
   * Default destructor
   */
 processor::~processor()
 {
 }
+
 /**
  * Function for getting the current values from /proc/stat file
  */
@@ -41,6 +43,8 @@ processor::CpuData processor::getSnapshot(){
             }
             total += time;  /* total time of current snapshot */
         }
+
+        
         current = {idle, total};
     }
     else{
@@ -49,6 +53,7 @@ processor::CpuData processor::getSnapshot(){
     }
     return current;
 }
+
 /**
  * Function to calculate the  total utilized CPU time
  */
@@ -71,4 +76,33 @@ float processor::getUtilization(){
 
     return percentage;
     
+}
+
+/**
+ * Helper function to print the progress bar
+ */
+std::string processor::getProgressBar(float percentage){
+    // TEMP DEBUG LINE:
+    //std::cout << "DEBUG: Function received " << percentage << std::endl;
+    
+    if (percentage > 100.0f) percentage = 100.0f;
+    if (percentage < 0.0f) percentage = 0.0f;
+    /*Calculate the slots full from 50 slots of the bar*/
+    float bars_float = (percentage / 100.0) * 50.0; 
+
+    /*To round the nearest whole number*/
+    int bars = static_cast<int>(bars_float + 0.5); 
+
+    int spaces = 50 - bars;
+    std::string bar =  "[" ;
+    
+    for (int itr = 0; itr < bars; itr++)
+    {
+        bar +=  "|";
+    }
+    for (int itr = 0; itr < spaces; itr++)
+    {
+        bar +=  "-";
+    }
+    return bar + "]";
 }
