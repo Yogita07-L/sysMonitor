@@ -1,8 +1,11 @@
 #include <iostream>
+#include <iomanip>
 #include <unistd.h>  // Essential for sleep() on Linux
+
 #include "sysUptime.h"
 #include "genInfo.h"
 #include "processor.h"
+#include "memory.h"
 
 int main() {
     std::cout << "--- PROGRAM STARTING ---" << std::endl;
@@ -10,6 +13,7 @@ int main() {
     sysUptime monitor; // Create the object
     genInfo m2;
     processor m3;
+    memory m4;
 
     while(true) {
         // Clear screen logic
@@ -21,10 +25,13 @@ int main() {
         std::cout << "Host Name: " << m2.GetHostName() << "                 Kernel: " << m2.GetOSName() << std::endl;
         std::cout << "\nUptime " << monitor.GetFormattedUptime() << std::endl;
 
-        float currentUsage = m3.getUtilization();
-        std::cout << "CPU Usage " << m3.getProgressBar(currentUsage) << " "
-                    << currentUsage << " %"<< std::endl;
-        // Output the formatted string
+        float cpuUsage = m3.getUtilization();
+        std::cout << "CPU Usage     " << m3.getProgressBar(cpuUsage) << " "
+                   << std::fixed << std::setprecision(2) << cpuUsage << " %"<< std::endl;
+
+        memory::MemData mem = m4.getMemData();
+        std::cout << "Memory Usage  " << m3.getProgressBar(float(mem.percentage))<< " "
+                    << mem.percentage << " %"<< " (" << mem.usedGB << " GB / " << mem.totalGB << " GB)" << std::endl;     
 
         
         sleep(1); // Wait 1 second

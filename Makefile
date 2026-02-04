@@ -1,6 +1,6 @@
 # 1. Variables - Makes it easy to change compilers or flags later
 CXX = g++-13
-CXXFLAGS = -I include -Wall -Wextra -std=c++17
+CXXFLAGS = -g -I include -Wall -Wextra -std=c++17
 TARGET = monitor
 
 # 2. Wildcards - Automatically finds all .cpp files in the src/ directory
