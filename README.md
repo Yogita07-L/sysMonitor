@@ -150,12 +150,3 @@ make
 - **Cross-Platform Build** — CMake enables future ARM cross-compilation
 
 ---
-
-## 🗺️ Roadmap
-
-- [ ] Per-process CPU and memory tracking via `/proc/[PID]/stat`
-- [ ] SocketCAN integration for embedded network monitoring
-- [ ] Cross-compilation support for ARM targets (Raspberry Pi / STM32MP1)
-- [ ] Unit tests with Google Test
-
----
