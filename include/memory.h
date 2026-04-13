@@ -17,6 +17,13 @@ public:
         double totalGB = 0.0;
         double usedGB = 0.0;
         double percentage = 0.0;
+
+        // New members
+        uint64_t swapTotalKB = 0;
+        uint64_t swapFreeKB = 0;
+        double swapTotalGB = 0.0;
+        double swapUsedGB = 0.0;
+        double swapPercentage = 0.0;
     };
 
     /* To get the total used memory */

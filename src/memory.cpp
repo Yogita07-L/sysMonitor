@@ -6,9 +6,8 @@
 #include <cstdint>
 
 memory::MemData memory::getMemData(){
-    MemData data = {0, 0};  /* Imtitalized the mem struct to 0*/
-    uint64_t total;
-    uint64_t available;
+    MemData data = {};  /* Imtitalized the mem struct to 0*/
+
 
     std::ifstream file("/proc/meminfo"); /*Open the stat file*/
 
@@ -20,21 +19,37 @@ memory::MemData memory::getMemData(){
             std::stringstream ss(line);
             ss >> buffer;
             if(buffer == "MemTotal:"){
-                ss >> total;
+                ss >> data.total;
             }
             if(buffer == "MemAvailable:"){
-                ss >> available;
+                ss >> data.available;
             }
-            data = {total, available};
+            if(buffer == "SwapTotal:"){
+                ss >> data.swapTotalKB;
+            }
+            if(buffer == "SwapFree:"){
+                ss >> data.swapFreeKB;
+            }           
         }
     }
     else{
         /* Error if the file does not open*/
         std::cerr << "The file cannot be opened."<< std::endl;
     }
-    data.totalGB = convertToGB(data.total);
-    data.usedGB = convertToGB(data.total - data.available);
+    data.totalGB    = convertToGB(data.total);
+    data.usedGB     = convertToGB(data.total - data.available);
     data.percentage = ((float)(data.total - data.available) / data.total) * 100.0;
+
+    data.swapTotalGB    = convertToGB(data.swapTotalKB);
+    data.swapUsedGB     = convertToGB(data.swapTotalKB - data.swapFreeKB);
+
+    if (data.swapTotalGB > 0) {
+        data.swapPercentage = (data.swapUsedGB / data.swapTotalGB) * 100;
+    } 
+    else {
+        data.swapPercentage = 0.0;
+    }
+
     return data;
 }
 
