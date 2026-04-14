@@ -6,3 +6,8 @@ monitor
 
 # Ignore VS Code's local settings
 .vscode/
+
+build/
+bin/
+*.o
+*.out
